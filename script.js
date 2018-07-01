@@ -1,17 +1,17 @@
 let url = 'http://api.icndb.com/jokes/random';
-let paragraph = document.getElementById('joke');
+let $paragraph = $('#joke');
 
-let button = document.getElementById('get-joke');
-button.addEventListener('click', function(){
-  getJoke();
+let $button = $('#get-joke').click(function() {
+    getJoke();
 });
 
 function getJoke() {
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.addEventListener('load', function(){
-    let response = JSON.parse(xhr.response);
-    paragraph.innerHTML = response.value.joke;
-  });
-  xhr.send();
-}
+    $.ajax({
+        method: 'GET',
+        url: url, 
+        success: function(res) {
+            $paragraph.text(res.value.joke);
+        }
+    
+    });
+    }
